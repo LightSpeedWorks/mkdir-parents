@@ -1,0 +1,25 @@
+{
+  "name": "mkdir-parents",
+  "version": "0.0.0",
+  "description": "mkdir-parents",
+  "main": "lib/mkdir-parents.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LightSpeedWorks/mkdir-parents.git"
+  },
+  "keywords": [
+    "mkdir"
+  ],
+  "author": "LightSpeedC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LightSpeedWorks/mkdir-parents/issues"
+  },
+  "homepage": "https://github.com/LightSpeedWorks/mkdir-parents#readme",
+  "scripts": {
+    "test": "cd test && mkdir-parents-test"
+  }
+}
