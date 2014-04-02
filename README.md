@@ -27,7 +27,7 @@ var mkdirParents = require('mkdir-parents');
 
 #### **[callback]** - {optional} function callback(err)
 
-#### *retuns* - thunk for `co`
+#### **retuns** - thunk for `co`
 
 ### `mkdirParents.sync` or `mkdirParents.mkdirParentsSync`
 
