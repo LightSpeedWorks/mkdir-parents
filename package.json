@@ -1,11 +1,11 @@
 {
   "name": "mkdir-parents",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Recursively mkdir, like `mkdir -p` and yieldable/thunkified for `co`",
   "main": "lib/mkdir-parents.js",
   "dependencies": {},
   "devDependencies": {
-    "co": ">=3.0.5"
+    "co": ">=4.4.0"
   },
   "keywords": [
     "mkdir", "co", "thunkify"

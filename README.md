@@ -55,7 +55,7 @@ co(function *() {
   } catch (err) {
     console.log(dir + ' cant created with status ' + err);
   }
-})();
+}).then(function () {});
 ```
 
 ### async example

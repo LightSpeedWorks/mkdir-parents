@@ -13,7 +13,7 @@ try {
 var fs = require('fs');
 
 // co generator
-co(function *() {
+var p = co(function *() {
   var dir = '/tmp/deep/dir';
   var mode = parseInt('0777', 8);
   try {
@@ -25,4 +25,11 @@ co(function *() {
 
   try { fs.rmdirSync('/tmp/deep/dir'); } catch (err) { /* ignore */ }
   try { fs.rmdirSync('/tmp/deep'); } catch (err) { /* ignore */ }
-})();
+});
+
+if (p && p.then && typeof p.then === 'function') p.then(function () {});
+else if (typeof p === 'function') p();
+else {
+  console.log(require('util').inspect(p, {colors: true, depth: null}));
+  throw new Error('what is the value returned from co: ' + typeof p);
+}
