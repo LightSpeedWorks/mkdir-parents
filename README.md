@@ -1,16 +1,21 @@
-mkdir-parents
+[mkdir-parents](https://www.npmjs.com/package/mkdir-parents) - npm
 =============
 
   **mkdir-parents** is a function like `mkdir -p`.
 
   This function is also yieldable, thunkified, useful with co.
 
+
 Installation
 ------------
+
+[![NPM](https://nodei.co/npm/mkdir-parents.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mkdir-parents/)
+[![NPM](https://nodei.co/npm-dl/mkdir-parents.png?height=2)](https://nodei.co/npm/mkdir-parents/)
 
 ```bash
 $ npm install mkdir-parents
 ```
+
 
 Usage
 -----
@@ -34,6 +39,7 @@ var mkdirParents = require('mkdir-parents');
 #### **dir** - directory path name
 
 #### **[mode]** - {optional} permission
+
 
 Examples
 --------
@@ -90,6 +96,7 @@ try {
   console.log(dir + ' cant created with status ' + err);
 }
 ```
+
 
 License
 -------
