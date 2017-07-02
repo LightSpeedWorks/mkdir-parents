@@ -3,7 +3,8 @@
 
   **mkdir-parents** is a function like `mkdir -p`.
 
-  This function returns promise, also yieldable, thunkified, promisified, useful with `aa` or `co`.
+  This function returns promise, async/await ready,
+  also yieldable, thunkified, promisified, useful with `aa` or `co`.
 
 Installation
 ------------
@@ -19,24 +20,20 @@ Usage
 -----
 
 ```js
-var mkdirParents = require('mkdir-parents');
+const mkdirParents = require('mkdir-parents');
 ```
 
-### `mkdirParents`
+### `mkdirParents(dir, [mode], [callback])`
 
-#### **dir** - directory path name
++ **dir** - directory path name
++ **[mode]** - {optional} permission
++ **[callback]** - {optional} function callback(err)
++ **retuns** - promise, thunk for `aa` or `co`. returns undefined if callback is specified.
 
-#### **[mode]** - {optional} permission
+### `mkdirParents.sync(dir, [mode])` or `mkdirParents.mkdirParentsSync(dir, [mode])`
 
-#### **[callback]** - {optional} function callback(err)
-
-#### **retuns** - thunk for `aa` or `co`
-
-### `mkdirParents.sync` or `mkdirParents.mkdirParentsSync`
-
-#### **dir** - directory path name
-
-#### **[mode]** - {optional} permission
++ **dir** - directory path name
++ **[mode]** - {optional} permission
 
 Examples
 --------
