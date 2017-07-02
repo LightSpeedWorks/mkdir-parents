@@ -74,7 +74,7 @@ mkdirParents(dir, mode)
 .catch(err => console.log(dir + ' cant created with status ' + err));
 ```
 
-### async await with `aa` or `co` with generator example
+### async await like `aa` or `co` with generator example
 
 ```js
 // require dependencies
