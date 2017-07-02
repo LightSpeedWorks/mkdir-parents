@@ -3,8 +3,7 @@
 
   **mkdir-parents** is a function like `mkdir -p`.
 
-  This function is also yieldable, thunkified, useful with co.
-
+  This function returns promise, also yieldable, thunkified, promisified, useful with `aa` or `co`.
 
 Installation
 ------------
@@ -15,7 +14,6 @@ Installation
 ```bash
 $ npm install mkdir-parents
 ```
-
 
 Usage
 -----
@@ -32,7 +30,7 @@ var mkdirParents = require('mkdir-parents');
 
 #### **[callback]** - {optional} function callback(err)
 
-#### **retuns** - thunk for `co`
+#### **retuns** - thunk for `aa` or `co`
 
 ### `mkdirParents.sync` or `mkdirParents.mkdirParentsSync`
 
@@ -40,21 +38,57 @@ var mkdirParents = require('mkdir-parents');
 
 #### **[mode]** - {optional} permission
 
-
 Examples
 --------
 
-### co example
+### async await example
 
 ```js
 // require dependencies
-var co = require('co');
-var mkdirParents = require('mkdir-parents');
+const mkdirParents = require('mkdir-parents');
 
-// co generator
-co(function *() {
+// async await style function
+async function main() {
+  const dir = '/tmp/deep/dir';
+  const mode = parseInt('0777', 8);
+
+  try {
+    await mkdirParents(dir, mode);
+    console.log(dir + ' created with perm 0' + mode.toString(8));
+  } catch (err) {
+    console.log(dir + ' cant created with status ' + err);
+  }
+}
+
+main();
+```
+
+### promise example
+
+```js
+// require dependencies
+const mkdirParents = require('mkdir-parents');
+
+const dir = '/tmp/deep/dir';
+const mode = parseInt('0777', 8);
+
+mkdirParents(dir, mode)
+.then(() => console.log(dir + ' created with perm 0' + mode.toString(8)))
+.catch(err => console.log(dir + ' cant created with status ' + err));
+```
+
+### async await with `aa` or `co` example
+
+```js
+// require dependencies
+const mkdirParents = require('mkdir-parents');
+const aa = require('aa');
+
+// aa with generator
+aa(function *() {
   var dir = '/tmp/deep/dir';
-  var mode = 0777;
+  var mode = parseInt('0777', 8);
+
   try {
     yield mkdirParents(dir, mode);
     console.log(dir + ' created with perm 0' + mode.toString(8));
@@ -71,7 +105,8 @@ co(function *() {
 var mkdirParents = require('mkdir-parents');
 
 var dir = '/tmp/deep/dir';
-var mode = 0777;
+var mode = parseInt('0777', 8);
+
 mkdirParents(dir, mode, function (err) {
   if (err) {
     console.log(dir + ' cant created with status ' + err);
@@ -88,7 +123,8 @@ mkdirParents(dir, mode, function (err) {
 var mkdirParentsSync = require('mkdir-parents').sync;
 
 var dir = '/tmp/deep/dir';
-var mode = 0777;
+var mode = parseInt('0777', 8);
+
 try {
   mkdirParentsSync(dir, mode);
   console.log(dir + ' created with perm 0' + mode.toString(8));
@@ -96,7 +132,6 @@ try {
   console.log(dir + ' cant created with status ' + err);
 }
 ```
-
 
 License
 -------

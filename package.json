@@ -1,17 +1,20 @@
 {
   "name": "mkdir-parents",
-  "version": "0.0.2",
-  "description": "Recursively mkdir, like `mkdir -p` and yieldable/thunkified for `co`",
-  "main": "lib/mkdir-parents.js",
+  "version": "0.1.0",
+  "description": "Recursively mkdir, like `mkdir -p` and returns promise/yieldable/thunkified for `aa` or `co`",
+  "main": "mkdir-parents.js",
   "dependencies": {},
-  "devDependencies": {
-    "co": ">=4.4.0"
-  },
+  "devDependencies": {},
   "keywords": [
-    "mkdir", "co", "thunkify"
+    "aa",
+    "async",
+    "await",
+    "async-await",
+    "co",
+    "mkdir",
+    "thunkify"
   ],
   "directories": {
-    "lib": "lib",
     "example": "examples",
     "test": "test"
   },
