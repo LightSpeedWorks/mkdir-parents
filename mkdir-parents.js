@@ -4,6 +4,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var aa = require('./aa');
 
 
 //######################################################################
@@ -29,56 +30,41 @@ function mkdirParents(dir, mode, cb) {
 
   dir = path.resolve(dir);
 
-  var ctx = this, called, results;
+  return aa(function (cb) {
+    // local variables
+    var dirList = []; // directories that we have to make directory
 
-  // local variables
-  var dirList = []; // directories that we have to make directory
+    fs.exists(dir, existsCallback);
 
-  fs.exists(dir, existsCallback);
+    // fs.exists callback...
+    function existsCallback(exists) {
+      if (exists) return mkdirCallback(null);
 
-  // fs.exists callback...
-  function existsCallback(exists) {
-    if (exists) {
-      return mkdirCallback(null);
-    }
+      // if dir does not exist, then we have to make directory
+      dirList.push(dir);
+      dir = path.resolve(dir, '..');
 
-    // if dir does not exist, then we have to make directory
-    dirList.push(dir);
-    dir = path.resolve(dir, '..');
+      return fs.exists(dir, existsCallback);
+    } // existsCallback
 
-    return fs.exists(dir, existsCallback);
-  } // existsCallback
+    // fs.mkdir callback...
+    function mkdirCallback(err) {
+      if (err && err.code !== 'EEXIST')
+        return mkdirParentsCallback(err);
 
-  // fs.mkdir callback...
-  function mkdirCallback(err) {
-    if (err && err.code !== 'EEXIST') {
-      return mkdirParentsCallback(err);
-    }
+      dir = dirList.pop();
+      if (!dir) return mkdirParentsCallback(null);
 
-    dir = dirList.pop();
-    if (!dir) {
-      return mkdirParentsCallback(null);
-    }
+      return fs.mkdir(dir, mode, mkdirCallback);
+    } // mkdirCallback
 
-    return fs.mkdir(dir, mode, mkdirCallback);
-  } // mkdirCallback
+    // mkdirParentsCallback(err)
+    function mkdirParentsCallback(err) {
+      if (err && err.code === 'EEXIST') err = null;
+      cb(err);
+    } // mkdirParentsCallback
 
-  // mkdirParentsCallback(err)
-  function mkdirParentsCallback(err) {
-    if (err && err.code === 'EEXIST') err = arguments[0] = null;
-    if (!results) results = arguments;
-    if (!cb || called) return;
-    called = true;
-    cb.apply(ctx, results);
-  } // mkdirParentsCallback
-
-  // return mkdirParentsYieldable
-  return function mkdirParentsYieldable(fn) {
-    if (!cb) cb = fn;
-    if (!results || called) return;
-    called = true;
-    cb.apply(ctx, results);
-  }; // mkdirParentsYieldable
+  }, cb);
 
 } // mkdirParents
 
@@ -117,6 +103,6 @@ function mkdirParentsSync(dir, mode) {
 
 
 exports = module.exports = mkdirParents;
-exports.mkdirParents     = mkdirParents;
+exports.mkdirParents = mkdirParents;
 exports.mkdirParentsSync = mkdirParentsSync;
-exports.sync             = mkdirParentsSync;
+exports.sync = mkdirParentsSync;

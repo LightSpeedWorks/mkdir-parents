@@ -1,19 +1,21 @@
-// require dependencies
-
 'use strict';
 
-var co = require('co');
-
+// require dependencies
 try {
-  var mkdirParents = require('../lib/mkdir-parents');
+  var mkdirParents = require('../mkdir-parents');
 } catch (err) {
   var mkdirParents = require('mkdir-parents');
 }
-
 var fs = require('fs');
 
 var dir = '/tmp/deep/dir';
 var mode = parseInt('0777', 8);
+
+var n = 0;
+++n; mkdirParents(dir, mode, callback);
+++n; mkdirParents(dir, mode, callback);
+++n; mkdirParents(dir, mode, callback);
+
 function callback(err) {
   if (err) {
     console.log(dir + ' cant created with status ' + err);
@@ -21,9 +23,13 @@ function callback(err) {
     console.log(dir + ' created with perm 0' + mode.toString(8));
   }
 
-  try { fs.rmdirSync('/tmp/deep/dir'); } catch (err) { /* ignore */ }
-  try { fs.rmdirSync('/tmp/deep'); } catch (err) { /* ignore */ }
+  if (--n === 0) end();
 }
-mkdirParents(dir, mode, callback);
-mkdirParents(dir, mode, callback);
-mkdirParents(dir, mode, callback);
+
+function end() {
+  try { fs.rmdirSync('/tmp/deep/dir'); }
+  catch (err) { console.error('ignore: ' + err); }
+  try { fs.rmdirSync('/tmp/deep'); }
+  catch (err) { console.error('ignore: ' + err); }
+  console.log('end');
+}
