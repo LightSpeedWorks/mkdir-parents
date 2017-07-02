@@ -74,7 +74,7 @@ mkdirParents(dir, mode)
 .catch(err => console.log(dir + ' cant created with status ' + err));
 ```
 
-### async await with `aa` or `co` example
+### async await with `aa` or `co` with generator example
 
 ```js
 // require dependencies
@@ -95,7 +95,7 @@ aa(function *() {
 }).then(function () {});
 ```
 
-### async example
+### async callback example
 
 ```js
 // require dependencies
@@ -105,6 +105,24 @@ var dir = '/tmp/deep/dir';
 var mode = parseInt('0777', 8);
 
 mkdirParents(dir, mode, function (err) {
+  if (err) {
+    console.log(dir + ' cant created with status ' + err);
+  } else {
+    console.log(dir + ' created with perm 0' + mode.toString(8));
+  }
+});
+```
+
+### async thunk example
+
+```js
+// require dependencies
+var mkdirParents = require('mkdir-parents');
+
+var dir = '/tmp/deep/dir';
+var mode = parseInt('0777', 8);
+
+mkdirParents(dir, mode)(function (err) {
   if (err) {
     console.log(dir + ' cant created with status ' + err);
   } else {
