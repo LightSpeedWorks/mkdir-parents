@@ -5,8 +5,8 @@
 var fs = require('fs');
 var path = require('path');
 
-var mkdirParents = require('../lib/mkdir-parents').mkdirParents;
-var mkdirParentsSync = require('../lib/mkdir-parents').mkdirParentsSync;
+var mkdirParents = require('../mkdir-parents').mkdirParents;
+var mkdirParentsSync = require('../mkdir-parents').mkdirParentsSync;
 
 var num = 0;
 var dirs = [];
