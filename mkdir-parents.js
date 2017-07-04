@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var aa = require('./aa');
+var aa = require('./aa-core');
 
 
 //######################################################################

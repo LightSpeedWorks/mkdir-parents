@@ -20,7 +20,7 @@ var aa = function () {
 	function aa(setup, cb) {
 		if (setup != null) {
 			if (typeof setup.next === 'function')
-				return gtorcb(setup, cb);
+				return aaGtor(setup, cb);
 
 			if (typeof setup.then === 'function')
 				return aa(function (res, rej) { setup.then(res, rej); }, cb);
@@ -45,7 +45,7 @@ var aa = function () {
 				var r = setup(last, last);
 
 				if (r != null && typeof r.next === 'function')
-					return gtorcb(r, cb);
+					return aaGtor(r, cb);
 
 				if (r != null && typeof r.then === 'function')
 					return aa(function (res, rej) { r.then(res, rej); }, cb);
@@ -81,7 +81,7 @@ var aa = function () {
 				var r = setup(callback, callback);
 
 				if (r != null && typeof r.next === 'function')
-					return gtorcb(r, cb);
+					return aaGtor(r, cb);
 
 				if (r != null && typeof r.then === 'function')
 					return aa(function (res, rej) { r.then(res, rej); }, cb);
@@ -97,7 +97,7 @@ var aa = function () {
 					var r = setup(callback, callback);
 
 					if (r != null && typeof r.next === 'function')
-						gtorcb(r, callback);
+						aaGtor(r, callback);
 
 					if (r != null && typeof r.then === 'function')
 						aa(function (res, rej) { r.then(res, rej); }, callback);
@@ -136,8 +136,8 @@ var aa = function () {
 		return thunk;
 	} // aa
 
-	// *** gtorcb
-	function gtorcb(gtor, cb) {
+	// *** aaGtor
+	function aaGtor(gtor, cb) {
 
 		if (typeof gtor === 'function') gtor = gtor();
 
@@ -162,7 +162,7 @@ var aa = function () {
 				else next(null, val);
 			} // next
 		}, cb);
-	} // gtorcb
+	} // aaGtor
 
 	// *** all
 	function all(arg, cb) {

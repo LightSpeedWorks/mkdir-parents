@@ -7,7 +7,7 @@ try {
   var mkdirParents = require('mkdir-parents');
 }
 var fs = require('fs');
-var aa = require('../aa');
+var aa = require('./aa-gtor-all');
 
 function *main() {
   var dir = '/tmp/deep/dir';
